@@ -1,0 +1,120 @@
+'use strict';
+
+var browserify = require('browserify');
+var gulp = require('gulp');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
+var uglify = require('gulp-uglify');
+var sourcemaps = require('gulp-sourcemaps');
+var gutil = require('gulp-util');
+var coffee = require('gulp-coffee');
+var concat = require('gulp-concat');
+var del = require('del');
+var inject = require('gulp-inject');
+var exec = require('child_process').exec;
+var cached = require('gulp-cached');
+var remember = require('gulp-remember');
+var sass = require('gulp-sass');
+
+/** clean */
+gulp.task('clean:tmp', function(cb) {
+    del([
+        './tmp'
+    ], cb);
+});
+gulp.task('clean:dist', function(cb) {
+    del([
+        './dist'
+    ], cb);
+});
+
+/** dist */
+gulp.task('dist', ['coffee'], function() {
+    var b = browserify();
+    b.add('./tmp/all.js');
+
+    return b.bundle()
+        .pipe(source('app.min.js'))
+        .pipe(buffer())
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(uglify())
+        .on('error', gutil.log)
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('./dist/js/'));
+});
+
+/** coffee compile */
+gulp.task('coffee', function() {
+    gulp.src(['./coffee/*.coffee', './coffee/*/*.coffee'])
+        .pipe(cached('coffee'))
+        .pipe(coffee({bare: true}).on('error', gutil.log))
+        .pipe(sourcemaps.init())
+        .pipe(remember('coffee'))
+        .pipe(concat('all.js'))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./tmp/'));
+});
+gulp.task('vender:js', function() {
+    gulp.src([
+        './bower_components/angular/angular.min.js',
+        './bower_components/angular-animate/angular-animate.min.js',
+        './bower_components/angular-aria/angular-aria.min.js',
+        './bower_components/angular-material/angular-material.min.js',
+        './bower_components/angular-messages/angular-messages.min.js'])
+        .pipe(sourcemaps.init())
+        .pipe(concat('vender.min.js'))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./dist/js/'));
+
+});
+
+/** sass compile */
+gulp.task('sass', function() {
+    gulp.src('./sass/main.scss')
+        .pipe(sourcemaps.init())
+        .pipe(sass({outputStyle: 'compressed'}))
+        .pipe(gulp.dest('./dist/css/'));
+});
+gulp.task('vender:css', function() {
+    gulp.src([
+        './bower_components/angular-material/angular-material.min.css'])
+        .pipe(sourcemaps.init())
+        .pipe(concat('vender.min.css'))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./dist/css/'));
+});
+
+/** inject */
+gulp.task('inject', ['dist', 'vender:js'], function() {
+    var target = gulp.src('./index.html');
+    var head = gulp.src(['./dist/js/vender.min.js'], {read: false});
+    var sources = gulp.src(['./dist/js/app.min.js', './dist/css/*.css'], {read: false});
+
+    return target
+        .pipe(inject(sources))
+        .pipe(inject(head, {name: 'vender'}))
+        .pipe(gulp.dest('./dist'));
+});
+
+/** watch */
+gulp.task('watch', function() {
+    var watcher = gulp.watch(['./coffee/*.coffee', './coffee/*/*.coffee', './sass/main.scss'], ['coffee', 'sass', 'dist']);
+    watcher.on('change', function(event) {
+        if(event.type === 'deleted') {
+            delete cached.caches.scriptes[event.path];
+            remember.forget('coffee', event.path);
+        }
+    });
+});
+
+gulp.task('clean', ['clean:tmp', 'clean:dist']);
+gulp.task('default', ['coffee', 'sass', 'dist', 'vender:js', 'vender:css', 'inject', 'watch'], function(cb) {
+    del([
+        './tmp'
+    ], cb);
+
+    exec('node_modules/lite-server/bin/lite-server --open ./dist', function(err) {
+        if(err) return cb(err);
+        cb();
+    });
+});

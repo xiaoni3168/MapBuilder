@@ -1,0 +1,26 @@
+{
+  "name": "map-builder",
+  "description": "",
+  "main": "test.js",
+  "authors": [
+    "Ani"
+  ],
+  "license": "MIT",
+  "moduleType": [
+    "es6"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "angular-animate": "~1.4.8",
+    "angular-aria": "~1.4.8",
+    "angular-material": "~1.0.2"
+  }
+}
