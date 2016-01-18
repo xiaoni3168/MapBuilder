@@ -81,11 +81,19 @@ gulp.task('sass', function() {
 });
 gulp.task('vender:css', function() {
     gulp.src([
-        './bower_components/angular-material/angular-material.min.css'])
+        './bower_components/angular-material/angular-material.min.css',
+        './bower_components/Ionicons/css/ionicons.min.css'])
         .pipe(sourcemaps.init())
         .pipe(concat('vender.min.css'))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./dist/css/'));
+});
+
+/** font */
+gulp.task('vender:font', function() {
+    gulp.src([
+        './bower_components/Ionicons/fonts/*'])
+        .pipe(gulp.dest('./dist/fonts/'));
 });
 
 /** template */
@@ -119,7 +127,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('clean', ['clean:tmp', 'clean:dist']);
-gulp.task('default', ['html', 'coffee', 'sass', 'dist', 'vender:js', 'vender:css', 'inject', 'watch'], function(cb) {
+gulp.task('default', ['html', 'coffee', 'sass', 'dist', 'vender:font', 'vender:js', 'vender:css', 'inject', 'watch'], function(cb) {
     del([
         './tmp'
     ], cb);
