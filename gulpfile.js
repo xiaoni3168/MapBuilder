@@ -74,6 +74,7 @@ gulp.task('vender:js', function() {
 /** sass compile */
 gulp.task('sass', function() {
     gulp.src('./sass/main.scss')
+        .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}))
         .pipe(gulp.dest('./dist/css/'));

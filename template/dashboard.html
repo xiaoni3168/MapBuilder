@@ -1,2 +1,13 @@
-<md-toolbar class="md-warn">
-</md-toolbar>
+<md-content class="dashboard">
+    <section layout="row" flex>
+        <md-toolbar class="md-warn">
+            <md-button class="md-icon-button" ng-click="toggle('left')">1</md-button>
+        </md-toolbar>
+
+        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+            <md-toolbar class="md-theme-indigo">
+            </md-toolbar>
+            <md-content></md-content>
+        </md-sidenav>
+    </section>
+</md-content>
