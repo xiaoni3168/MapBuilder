@@ -9,13 +9,10 @@
         <!-- vender:js -->
         <!-- endinject -->
     </head>
-    <body>
+    <body ng-app="MapBuilder">
+        <div ui-view="dashboard"></div>
+        
         <!-- inject:js -->
         <!-- endinject -->
-        <div ng-app="test" ng-controller="AppCtrl" ng-cloak>
-            <md-content>
-                <md-button>{{title}}</md-button>
-            </md-content>
-        </div>
     </body>
 </html>

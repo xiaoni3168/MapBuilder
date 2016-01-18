@@ -1,5 +1,6 @@
 'use strict';
 
+var colors = require('colors');
 var browserify = require('browserify');
 var gulp = require('gulp');
 var source = require('vinyl-source-stream');
@@ -15,6 +16,7 @@ var exec = require('child_process').exec;
 var cached = require('gulp-cached');
 var remember = require('gulp-remember');
 var sass = require('gulp-sass');
+var plumber = require('gulp-plumber');
 
 /** clean */
 gulp.task('clean:tmp', function(cb) {
@@ -60,7 +62,8 @@ gulp.task('vender:js', function() {
         './bower_components/angular-animate/angular-animate.min.js',
         './bower_components/angular-aria/angular-aria.min.js',
         './bower_components/angular-material/angular-material.min.js',
-        './bower_components/angular-messages/angular-messages.min.js'])
+        './bower_components/angular-messages/angular-messages.min.js',
+        './bower_components/angular-ui-router/release/angular-ui-router.min.js'])
         .pipe(sourcemaps.init())
         .pipe(concat('vender.min.js'))
         .pipe(sourcemaps.write())
@@ -84,6 +87,12 @@ gulp.task('vender:css', function() {
         .pipe(gulp.dest('./dist/css/'));
 });
 
+/** template */
+gulp.task('html', function() {
+    gulp.src('./template/*.html')
+        .pipe(gulp.dest('./dist/template/'));
+});
+
 /** inject */
 gulp.task('inject', ['dist', 'vender:js'], function() {
     var target = gulp.src('./index.html');
@@ -98,17 +107,18 @@ gulp.task('inject', ['dist', 'vender:js'], function() {
 
 /** watch */
 gulp.task('watch', function() {
-    var watcher = gulp.watch(['./coffee/*.coffee', './coffee/*/*.coffee', './sass/main.scss'], ['coffee', 'sass', 'dist']);
+    var watcher = gulp.watch(['coffee/*.coffee', 'coffee/*/*.coffee', 'sass/main.scss', 'template/*.html'], ['html', 'coffee', 'sass', 'dist']);
     watcher.on('change', function(event) {
+        console.log(('File Change: ' + event.path).green);
         if(event.type === 'deleted') {
-            delete cached.caches.scriptes[event.path];
+            delete cached.caches.coffee[event.path];
             remember.forget('coffee', event.path);
         }
     });
 });
 
 gulp.task('clean', ['clean:tmp', 'clean:dist']);
-gulp.task('default', ['coffee', 'sass', 'dist', 'vender:js', 'vender:css', 'inject', 'watch'], function(cb) {
+gulp.task('default', ['html', 'coffee', 'sass', 'dist', 'vender:js', 'vender:css', 'inject', 'watch'], function(cb) {
     del([
         './tmp'
     ], cb);
