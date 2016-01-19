@@ -17,3 +17,7 @@ MapBuilder
         $mdThemingProvider.theme 'default'
             .warnPalette 'blue'
     ]
+    .config ['$mdIconProvider', ($mdIconProvider) ->
+        $mdIconProvider
+            .iconSet('map', 'svg/map.svg', 317);
+    ]

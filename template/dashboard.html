@@ -1,14 +1,16 @@
 <md-content class="dashboard">
     <section layout="row" flex style="height:100%">
         <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-            <md-toolbar class="md-theme-indigo">
+            <md-toolbar class="md-whiteframe-glow-z1">
+                <md-icon md-svg-icon="map:map" style="height:120px;width:120px;margin-top:30px;" aria-label="Map"></md-icon>
+                <h1 class="mb-side-header-label">Map Builder</h1>
             </md-toolbar>
             <md-content></md-content>
         </md-sidenav>
         <div layout="column" flex>
-            <md-toolbar class="md-warn">
+            <md-toolbar class="mb-header md-whiteframe-glow-z1">
                 <md-button class="md-icon-button toolbar-button" ng-click="toggle('left')" hide-gt-md>
-                    <i class="ion-navicon"></i>
+                    <i class="icon ion-navicon" aria-label="Navicon"></i>
                 </md-button>
             </md-toolbar>
         </div>

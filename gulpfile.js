@@ -102,6 +102,12 @@ gulp.task('html', function() {
         .pipe(gulp.dest('./dist/template/'));
 });
 
+/** svg */
+gulp.task('svg', function() {
+    gulp.src('./svg/*')
+        .pipe(gulp.dest('./dist/svg/'));
+});
+
 /** inject */
 gulp.task('inject', ['dist', 'vender:js'], function() {
     var target = gulp.src('./index.html');
@@ -116,7 +122,7 @@ gulp.task('inject', ['dist', 'vender:js'], function() {
 
 /** watch */
 gulp.task('watch', function() {
-    var watcher = gulp.watch(['coffee/*.coffee', 'coffee/*/*.coffee', 'sass/main.scss', 'template/*.html'], ['html', 'coffee', 'sass', 'dist']);
+    var watcher = gulp.watch(['coffee/*.coffee', 'coffee/*/*.coffee', 'sass/main.scss', 'template/*.html', 'svg/*.svg'], ['html', 'coffee', 'sass', 'svg', 'dist']);
     watcher.on('change', function(event) {
         console.log(('File Change: ' + event.path).green);
         if(event.type === 'deleted') {
@@ -127,7 +133,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('clean', ['clean:tmp', 'clean:dist']);
-gulp.task('default', ['html', 'coffee', 'sass', 'dist', 'vender:font', 'vender:js', 'vender:css', 'inject', 'watch'], function(cb) {
+gulp.task('default', ['html', 'coffee', 'sass', 'svg', 'dist', 'vender:font', 'vender:js', 'vender:css', 'inject', 'watch'], function(cb) {
     del([
         './tmp'
     ], cb);
