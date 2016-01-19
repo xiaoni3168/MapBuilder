@@ -3,6 +3,7 @@ html {
     font-family: GillSans, Calibri, Trebuchet, sans-serif;
 }
 body {
+    overflow: hidden;
     background-color: $mainColor;
 }
 .map-builder {
@@ -44,4 +45,21 @@ body {
 }
 .emoji-repeat:hover {
     transform: scale(1.2);
+}
+.mb-side-nav {
+    background-color: #106CC8;
+}
+.menu-list {
+    background-color: #106CC8;
+}
+.menu-list ul {
+    -webkit-margin-before: 0 !important;
+    -webkit-margin-after: 0 !important;
+}
+.menu-list ul li {
+    padding: 10px 20px;
+    border-bottom: 1px solid #267ED5;
+}
+.menu-list ul li span {
+    font-size: 1.6em;
 }

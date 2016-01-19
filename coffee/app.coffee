@@ -26,6 +26,12 @@ MapBuilder
                     'content':
                         templateUrl: 'template/home.html'
                         controller: 'HomeCtrl'
+            .state 'map.emoji',
+                url: '/emoji'
+                views:
+                    'content':
+                        templateUrl: 'template/emoji.html'
+                        controller: 'EmojiCtrl'
     ]
     .config ['$mdThemingProvider', ($mdThemingProvider) ->
         $mdThemingProvider.theme 'default'
