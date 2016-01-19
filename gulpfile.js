@@ -18,6 +18,7 @@ var remember = require('gulp-remember');
 var sass = require('gulp-sass');
 var plumber = require('gulp-plumber');
 
+///////////////////////////////////////////////// pack
 /** clean */
 gulp.task('clean:tmp', function(cb) {
     del([
@@ -140,12 +141,43 @@ gulp.task('watch', function() {
 });
 
 gulp.task('clean', ['clean:tmp', 'clean:dist']);
-gulp.task('default', ['html', 'coffee', 'sass', 'svg', 'dist', 'vender:font', 'vender:js', 'vender:css', 'inject', 'watch'], function(cb) {
+gulp.task('pack', ['html', 'coffee', 'sass', 'svg', 'dist', 'vender:font', 'vender:js', 'vender:css', 'inject', 'watch'], function(cb) {
     del([
         './tmp'
     ], cb);
 
     exec('node_modules/lite-server/bin/lite-server --open ./dist', function(err) {
+        if(err) return cb(err);
+        cb();
+    });
+});
+///////////////////////////////////////////////// pack end
+
+///////////////////////////////////////////////// develop end
+gulp.task('d:c', function(cb) {
+    del([
+        'coffee/*.js',
+        'coffee/*/*.js',
+        'sass/*.css'
+    ], cb);
+});
+gulp.task('develop:coffee', function() {
+    gulp.src(['coffee/*.coffee', 'coffee/*/*.coffee'])
+        .pipe(plumber())
+        .pipe(coffee({bare: true}).on('error', gutil.log))
+        .pipe(gulp.dest('coffee/'));
+});
+gulp.task('develop:sass', function() {
+    gulp.src(['sass/*.scss'])
+        .pipe(plumber())
+        .pipe(sass())
+        .pipe(gulp.dest('sass/'));
+});
+gulp.task('develop:watch', function() {
+    gulp.watch(['coffee/*.coffee', 'coffee/*/*.coffee', 'sass/*.scss', 'template/*.html'], ['develop:coffee', 'develop:sass']);
+});
+gulp.task('default', ['develop:coffee', 'develop:sass', 'develop:watch'], function(cb) {
+    exec('node_modules/lite-server/bin/lite-server', function(err) {
         if(err) return cb(err);
         cb();
     });
