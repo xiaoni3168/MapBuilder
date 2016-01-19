@@ -13,12 +13,19 @@ MapBuilder
     ]
     .config ['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) ->
         $urlRouterProvider.otherwise '/map'
-        $stateProvider.state 'map',
-            url: '/map'
-            views:
-                'dashboard':
-                    templateUrl: 'template/dashboard.html'
-                    controller: 'DashboardCtrl'
+        $stateProvider
+            .state 'map',
+                url: '/map'
+                views:
+                    'dashboard':
+                        templateUrl: 'template/dashboard.html'
+                        controller: 'DashboardCtrl'
+            .state 'map.home',
+                url: '/home'
+                views:
+                    'content':
+                        templateUrl: 'template/home.html'
+                        controller: 'HomeCtrl'
     ]
     .config ['$mdThemingProvider', ($mdThemingProvider) ->
         $mdThemingProvider.theme 'default'

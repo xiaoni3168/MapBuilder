@@ -36,12 +36,13 @@ gulp.task('dist', ['coffee'], function() {
     b.add('./tmp/all.js');
 
     return b.bundle()
+        .pipe(plumber())
         .pipe(source('app.min.js'))
         .pipe(buffer())
-        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(sourcemaps.init())
         .pipe(uglify())
         .on('error', gutil.log)
-        .pipe(sourcemaps.write('./'))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('./dist/js/'));
 });
 
