@@ -63,7 +63,9 @@ gulp.task('vender:js', function() {
         './bower_components/angular-aria/angular-aria.min.js',
         './bower_components/angular-material/angular-material.min.js',
         './bower_components/angular-messages/angular-messages.min.js',
-        './bower_components/angular-ui-router/release/angular-ui-router.min.js'])
+        './bower_components/angular-ui-router/release/angular-ui-router.min.js',
+        './bower_components/jquery/dist/jquery.min.js',
+        './bower_components/Materialize/dist/js/materialize.min.js'])
         .pipe(sourcemaps.init())
         .pipe(concat('vender.min.js'))
         .pipe(sourcemaps.write())
@@ -82,7 +84,8 @@ gulp.task('sass', function() {
 gulp.task('vender:css', function() {
     gulp.src([
         './bower_components/angular-material/angular-material.min.css',
-        './bower_components/Ionicons/css/ionicons.min.css'])
+        './bower_components/Ionicons/css/ionicons.min.css',
+        './bower_components/Materialize/dist/css/materialize.min.css'])
         .pipe(sourcemaps.init())
         .pipe(concat('vender.min.css'))
         .pipe(sourcemaps.write())
@@ -94,6 +97,9 @@ gulp.task('vender:font', function() {
     gulp.src([
         './bower_components/Ionicons/fonts/*'])
         .pipe(gulp.dest('./dist/fonts/'));
+    gulp.src([
+        './bower_components/Materialize/dist/font/roboto/*'])
+        .pipe(gulp.dest('./dist/font/roboto/'));
 });
 
 /** template */

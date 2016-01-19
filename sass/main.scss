@@ -1,4 +1,7 @@
 $mainColor: #2888e5;
+html {
+    font-family: GillSans, Calibri, Trebuchet, sans-serif;
+}
 body {
     background-color: $mainColor;
 }
@@ -24,4 +27,21 @@ body {
 }
 .mb-side-header-label {
     text-align: center;
+    font-size: 1.8em !important;
+}
+.emoji-repeat {
+    height: 64px;
+    width: 64px;
+    cursor: pointer;
+    transition: .3s;
+}
+.emoji-repeat-area {
+    -webkit-user-select: none;
+    margin: 5px;
+}
+.emoji-repeat-area:focus {
+    outline: none;
+}
+.emoji-repeat:hover {
+    transform: scale(1.2);
 }

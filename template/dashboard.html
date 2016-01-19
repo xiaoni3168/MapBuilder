@@ -1,8 +1,8 @@
 <md-content class="dashboard">
     <section layout="row" flex style="height:100%">
         <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-            <md-toolbar class="md-whiteframe-glow-z1">
-                <md-icon md-svg-icon="map:map" style="height:120px;width:120px;margin-top:30px;" aria-label="Map"></md-icon>
+            <md-toolbar class="md-whiteframe-glow-z1 waves-effect waves-light waves-ripple">
+                <md-icon md-svg-icon="{{headerIcon}}" style="height:120px;width:120px;margin-top:30px;display:block;" aria-label="Map"></md-icon>
                 <h1 class="mb-side-header-label">Map Builder</h1>
             </md-toolbar>
             <md-content></md-content>
@@ -13,6 +13,45 @@
                     <i class="icon ion-navicon" aria-label="Navicon"></i>
                 </md-button>
             </md-toolbar>
+            <md-content>
+                <md-card>
+                    <!-- <section layout="padding" flex style="padding:50px;">
+                        <span ng-repeat="emoji in emojis" ng-click="changeHeaderIcon(emoji.emoji)" class="emoji-repeat-area">
+                            <md-tooltip md-direction="top">
+                                {{emoji.name}}
+                            </md-tooltip>
+                            <md-icon md-svg-icon="{{emoji.emoji}}" class="emoji-repeat"></md-icon>
+                        </span>
+                    </section> -->
+                    <md-grid-list
+                        md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6"
+                        md-row-height-gt-md="1:1" md-row-height="4:3"
+                        md-gutter="8px" md-gutter-gt-sm="4px"
+                        style="text-align:center;">
+                        <md-grid-title ng-repeat="emoji in emojis"
+                            md-rowspan="2"
+                            md-colspan="2"
+                            md-colspan-sm="1"
+                            class="emoji-repeat-area"
+                            ng-click="changeHeaderIcon(emoji.emoji)">
+                            <md-tooltip md-direction="top">
+                                {{emoji.name}}
+                            </md-tooltip>
+                            <md-icon md-svg-icon="{{emoji.emoji}}" class="emoji-repeat"></md-icon>
+                        </md-grid-title>
+                    </md-grid-list>
+                </md-card>
+            </md-content>
+        </div>
+        <div class="fixed-action-btn click-to-toggle" style="botom:45px;right:24px;">
+            <a class="btn-floating btn-large red">
+                <md-icon md-svg-icon="emoji:emoji-2604" style="height:32px;width:32px;"></md-icon>
+            </a>
+            <ul>
+                <li><a class="btn-floating blue"><md-icon md-svg-icon="emoji:emoji-1f412" style="height:24px;width:24px;"></md-icon></a></li>
+                <li><a class="btn-floating orange"><md-icon md-svg-icon="emoji:emoji-1f433" style="height:24px;width:24px;"></md-icon></a></li>
+                <li><a class="btn-floating green"><md-icon md-svg-icon="emoji:emoji-1f40e" style="height:24px;width:24px;"></md-icon></a></li>
+            </ul>
         </div>
     </section>
 </md-content>
