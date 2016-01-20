@@ -13,11 +13,14 @@
                     <li class="waves-effect waves-light waves-block" ui-sref=".emoji">
                         <span>Emoji</span>
                     </li>
+                    <li class="waves-effect waves-light waves-block" ui-sref=".map">
+                        <span>Map</span>
+                    </li>
                 </ul>
             </md-content>
         </md-sidenav>
         <div layout="column" flex>
-            <md-toolbar class="mb-header md-whiteframe-glow-z1">
+            <md-toolbar id="header" class="mb-header md-whiteframe-glow-z1">
                 <md-button class="md-icon-button toolbar-button" ng-click="toggle('left')" hide-gt-md>
                     <i class="icon ion-navicon" aria-label="Navicon"></i>
                 </md-button>
@@ -26,7 +29,7 @@
                 <div ui-view="content"></div>
             </md-content>
         </div>
-        <div class="fixed-action-btn click-to-toggle" style="botom:45px;right:24px;">
+        <div id="FBA" class="fixed-action-btn click-to-toggle" style="botom:45px;right:24px;">
             <a class="btn-floating btn-large red">
                 <md-icon md-svg-icon="emoji:emoji-2604" style="height:32px;width:32px;"></md-icon>
             </a>

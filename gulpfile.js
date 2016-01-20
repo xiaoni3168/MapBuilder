@@ -178,7 +178,7 @@ gulp.task('develop:watch', function() {
     gulp.watch(['coffee/*.coffee', 'coffee/*/*.coffee', 'sass/*.scss', 'template/*.html'], ['develop:coffee', 'develop:sass']);
 });
 gulp.task('default', ['develop:coffee', 'develop:sass', 'develop:watch'], function(cb) {
-    exec('node_modules/lite-server/bin/lite-server', {maxBuffer: 1024 * 500}, function(err) {
+    exec('node_modules/lite-server/bin/lite-server', {maxBuffer: 1024 * 5000}, function(err) {
         if(err) return cb(err);
         cb();
     });

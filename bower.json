@@ -24,6 +24,7 @@
     "angular-material": "~1.0.2",
     "angular-ui-router": "~0.2.15",
     "Ionicons": "ionicons#~2.0.1",
-    "Materialize": "materialize#~0.97.5"
+    "Materialize": "materialize#~0.97.5",
+    "emojione": "~2.0.1"
   }
 }
