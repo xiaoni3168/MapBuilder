@@ -1,0 +1,46 @@
+.mb-container {
+    display: inline-block;
+    width: 480px;
+    height: 320px;
+    overflow: scroll;
+    padding: 15px;
+    background-color: #d0cdcd;
+    transition: .5s;
+}
+.mb-container:focus {
+    background-color: #f09191;
+}
+.mb-map {
+    display: inline-block;
+    background-color: #5ca24c;
+    transition: .75s;
+    height: 0;
+    width: 0;
+}
+.mb-map span {
+    color: #DDDDDD;
+    font-size: 0.8em;
+    text-align: center;
+    line-height: 32px;
+    float: left;
+    height: 32px;
+    width: 32px;
+    background-color: rgba(91, 91, 91, 0.3);
+    border-left: 1px dotted #dddddd;
+    border-top: 1px dotted #dddddd;
+    cursor: pointer;
+    transition: 0.5s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-user-select: none;
+}
+.mb-map span.selected {
+    background-color: #f07777;
+}
+.mb-map span:hover {
+    background-color: rgba(91, 91, 91, 0.7);
+}
+.mb-map span.selected:hover {
+    background-color: #f07777;
+}
