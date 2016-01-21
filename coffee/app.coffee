@@ -1,7 +1,8 @@
 MapBuilderController = angular.module 'MapBuilder.controllers', []
 MapBuilderService = angular.module 'MapBuilder.services', []
+MapBuilderDirective = angular.module 'MapBuilder.directives', []
 
-MapBuilder = angular.module 'MapBuilder', ['ngMaterial', 'ui.router', 'MapBuilder.controllers', 'MapBuilder.services']
+MapBuilder = angular.module 'MapBuilder', ['ngMaterial', 'ui.router', 'MapBuilder.controllers', 'MapBuilder.services', 'MapBuilder.directives']
 
 MapBuilder
     .factory '$myInkRipple', ['$mdInkRipple', ($mdInkRipple) ->
@@ -32,6 +33,12 @@ MapBuilder
                     'content':
                         templateUrl: 'template/emoji.html'
                         controller: 'EmojiCtrl'
+            .state 'map.map',
+                url: '/map'
+                views:
+                    'content':
+                        templateUrl: 'template/map.html'
+                        controller: 'MapCtrl'
     ]
     .config ['$mdThemingProvider', ($mdThemingProvider) ->
         $mdThemingProvider.theme 'default'
