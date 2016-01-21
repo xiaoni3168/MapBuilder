@@ -12,7 +12,7 @@ MapBuilder
             , options
     ]
     .config ['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) ->
-        $urlRouterProvider.otherwise '/map'
+        $urlRouterProvider.otherwise '/map/home'
         $stateProvider
             .state 'map',
                 url: '/map'

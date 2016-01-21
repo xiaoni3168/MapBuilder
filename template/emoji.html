@@ -1,5 +1,5 @@
 <md-card>
-    <md-grid-list
+    <!-- <md-grid-list
         md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6"
         md-row-height-gt-md="1:1" md-row-height="4:3"
         md-gutter="8px" md-gutter-gt-sm="4px"
@@ -15,5 +15,28 @@
             </md-tooltip>
             <md-icon md-svg-icon="{{emoji.emoji}}" class="emoji-repeat"></md-icon>
         </md-grid-title>
-    </md-grid-list>
+    </md-grid-list> -->
+    <md-content class="md-padding">
+        <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
+            <md-tab ng-repeat="tab in dashboard.result2" label="{{$index}}">
+                <md-grid-list
+                    md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6"
+                    md-row-height-gt-md="1:1" md-row-height="4:3"
+                    md-gutter="8px" md-gutter-gt-sm="4px"
+                    style="text-align:center;">
+                    <md-grid-title ng-repeat="item in tab"
+                        md-rowspan="2"
+                        md-colspan="2"
+                        md-colspan-sm="1"
+                        class="emoji-repeat-area"
+                        ng-click="changeHeaderIcon(item.unicode)">
+                        <svg>
+                            <use xlink:href="{{emoji.path + item.unicode}}"></use>
+                        </svg>
+                        <!-- <md-icon md-svg-icon="{{emoji.emoji}}" class="emoji-repeat"></md-icon> -->
+                    </md-grid-title>
+                </md-grid-list>
+            </md-tab>
+        </md-tabs>
+    </md-content>
 </md-card>

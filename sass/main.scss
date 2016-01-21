@@ -40,6 +40,10 @@ body {
     -webkit-user-select: none;
     margin: 5px;
 }
+.emoji-repeat-area svg {
+    height: 32px;
+    width: 32px;
+}
 .emoji-repeat-area:focus {
     outline: none;
 }
@@ -62,4 +66,8 @@ body {
 }
 .menu-list ul li span {
     font-size: 1.6em;
+}
+#emoji svg {
+    height: 32px;
+    width: 32px;
 }
