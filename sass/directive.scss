@@ -44,3 +44,14 @@
 .mb-map span.selected:hover {
     background-color: #f07777;
 }
+.mb-toolbox {
+    display: inline-block;
+    height: 320px;
+    width: 320px;
+    margin-left: 50px;
+    background-color: #d0cdcd;
+    transition: .5s;
+}
+.mb-toolbox:focus {
+    background-color: #f09191;
+}
